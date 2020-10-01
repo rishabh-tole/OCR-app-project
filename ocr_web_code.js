@@ -28,10 +28,9 @@ async function extractText(image) {
 // This can be a string or actual image data.
 
 // Read image data from file system
-//const image = _fs.readFileSync('./demo.png');
+const image = _fs.readFileSync('./testocr.png');
 
 // Provide path to image on the internet
-const image = 'https://pyimagesearch.com/wp-content/uploads/2017/06/example_01.png';
 
 extractText(image).then((text) => {
     console.log('------------------------');
