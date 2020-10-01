@@ -30,6 +30,8 @@ async function extractText(image) {
 // Read image data from file system
 const image = _fs.readFileSync('./testocr.png');
 
+//if want adress = take out fs.readfile
+
 // Provide path to image on the internet
 
 extractText(image).then((text) => {
