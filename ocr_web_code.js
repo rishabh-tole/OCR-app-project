@@ -3,6 +3,9 @@
 const { createWorker } = require('tesseract.js');
 const _fs = require('fs');
 
+var files = _fs.readdirSync('/Users/phinix/Desktop/OCR');
+
+
 async function extractText(image) {
     console.log('Creating worker');
     const worker = createWorker();
@@ -28,11 +31,17 @@ async function extractText(image) {
 // This can be a string or actual image data.
 
 // Read image data from file system
-const image = _fs.readFileSync('./testocr.png');
+const image = _fs.readFileSync('/Users/phinix/Desktop/OCR/' + files[1]);
 
 //if want adress = take out fs.readfile
 
 // Provide path to image on the internet
+
+
+
+
+
+
 
 extractText(image).then((text) => {
     console.log('------------------------');
