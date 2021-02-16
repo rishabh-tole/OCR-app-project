@@ -1,5 +1,4 @@
 'use strict';
-
 const { createWorker } = require('tesseract.js');
 const _fs = require('fs');
 
