@@ -1,0 +1,20 @@
+{
+  "name": "CostlyCoralAudacity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cheerio": "^1.0.0-rc.3",
+    "htmlparser2": "^5.0.0",
+    "node-fetch": "^2.6.1",
+    "node-html-parser": "^1.2.21",
+    "tesseract.js": "^2.1.3"
+  }
+}
