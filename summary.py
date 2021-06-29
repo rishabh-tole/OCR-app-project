@@ -22,7 +22,7 @@ class Summary():
   def __innit__(self):
     LANGUAGE = "english"
 
-  def summarize(self,bullets=5):
+  def summarize(self,bullets=3):
     print("---------")
     #url = "https://en.wikipedia.org/wiki/Automatic_summarization"
     #parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))

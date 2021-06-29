@@ -2,9 +2,12 @@
 const { createWorker } = require('tesseract.js');
 const _fs = require('fs');
 
-var files = _fs.readdirSync('/Users/phinix/Desktop/OCR');
+//var files = _fs.readdirSync('/Users/phinix/Desktop/OCR');
 
 
+async function call(){
+  console.log(" ")
+}
 async function extractText(image) {
     console.log('Creating worker');
     const worker = createWorker();
@@ -23,14 +26,19 @@ async function extractText(image) {
     console.log('Terminating worker');
     await worker.terminate();
 
-    //Return results
+    _fs.writeFile('document.txt', text, call);
     return text;
 }
 
-// This can be a string or actual image data.
+
+
+//This can be a string or actual image data.
 
 // Read image data from file system
-const image = _fs.readFileSync('/Users/phinix/Desktop/OCR/' + files[1]);
+
+//const image = _fs.readFileSync('/Users/phinix/Desktop/OCR/' + files[1]);
+
+const image = _fs.readFileSync("testocr.png")
 
 //if want adress = take out fs.readfile
 
@@ -43,10 +51,6 @@ const image = _fs.readFileSync('/Users/phinix/Desktop/OCR/' + files[1]);
 
 
 extractText(image).then((text) => {
-    console.log('------------------------');
-    console.log('OCR completed');
-    console.log('------------------------');
-    console.log(text);
-    console.log('------------------------');
+    console.log("text");
 });
 
