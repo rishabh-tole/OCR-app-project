@@ -10,7 +10,7 @@ def image_to_text():
 def summarize_doc(bullets):
   print("sum")
   summ = Summary()
-  summ.summarize(bullets)
+  return summ.summarize(bullets)
 
 
 def audio_to_text():

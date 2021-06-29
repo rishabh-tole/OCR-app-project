@@ -32,6 +32,7 @@ class Summary():
 
     summarizer = Summarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
-
+    master = ""
     for sentence in summarizer(parser.document, bullets):
-       print(sentence)
+       master = str(master)+str(sentence)
+    return master
