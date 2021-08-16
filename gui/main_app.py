@@ -2,27 +2,37 @@ from tkinter import *
 from tkinter import filedialog
 import os
 import sys
+import time
 sys.path.append("/Users/phinix/projects/note/back_end")
+sys.path.append("/Users/phinix/projects/note/gui")
 os.system("clear")
 
 from image_to_text import ImageToText
 from summary import Summary
+from audio_to_text import AudioToText
 
 summary = Summary()
+audio = AudioToText()
 imconverter = ImageToText()
 root = Tk()
 root.title("Note.LLC")
-global is_on, path
+global is_on, path, output_label
 is_on=True
 
 e = Label(root, text="To take notes, chose from a image, audio file or a website")
 e.grid(row=0,column=0, columnspan=3, padx=10,pady=10)
 
+output_label = Label(root, text="", wraplength=600)
+output_label.grid(row=10,column=0, columnspan=3)
 
+
+url_label = Label(root, text="Paste the url here").grid(row=3,column=2, padx=10,pady=10)
+url_entry = Entry(root, width=15)
+url_entry.grid(row=4,column=2,padx=10,pady=10)
 
 def open_file():
     global path
-    root.filename = filedialog.askopenfilename(initialdir="/Users/phinix", title="Select A File",)
+    root.filename = filedialog.askopenfilename(initialdir="/Users/phinix/Desktop", title="Select A File",)
     path = root.filename
     return root.filename
 
@@ -36,26 +46,62 @@ def switch():
         on_button.config(image=on)
         is_on=True
 
-def image_to_notes():
-        # print(root.filename)
-        raw = imconverter.convert(path)
-        if is_on:
-            bullets = bullet_points.get()
-            if type(bullets) != "int":
-                bullets = 3
-            show_text = summary.summarize(bullets)
-        else:
-            show_text=raw
+def loading():
+    print("should have shown text")
+    show_text("working...")
+    root.update_idletasks()
 
-        
-        output_label = Label(root, text=show_text, wraplength=600)
-        output_label.grid(row=10,column=0, columnspan=3)
+def image_to_notes():
+
+    global output_label, is_on
+        # print(root.filename)
+    raw = imconverter.convert(path)
+    if is_on:
+        bullets = bullet_points.get()
+        if type(bullets) != "int":
+            bullets = 3
+        text = summary.summarize_doc(bullets)
+        show_text(raw)
+    else:
+        show_text(raw)
+
 
 def audio_to_notes():
-    pass
+    global path, is_on
+
+    bullets = bullet_points.get()
+    loading()
+
+    if is_on:
+
+        print("starting transcription")
+        time.sleep(1)
+        f = open("document.txt", "a")
+        f.write( audio.get_large_audio_transcription(path))
+        f.close()
+        text = summary.summarize_doc(bullets=3)
+        show_text(text)
+    else:
+        time.sleep(1)
+        show_text(audio.get_large_audio_transcription(path))
+
+
+    
 
 def website_to_notes():
-    pass
+    url = url_entry.get()
+
+    bullets = bullet_points.get()
+
+    text = summary.summarize_website(url, bullets=3)
+    show_text(text)
+
+def show_text(show_text):
+    global output_label
+    output_label.after(1, output_label.destroy) 
+    output_label = Label(root, text=show_text, wraplength=600)
+    output_label.grid(row=10,column=0, columnspan=3)
+
 
 
 
@@ -73,6 +119,7 @@ website_label = Label(root, text="Website into Notes").grid(row=2,column=2, padx
 bullet_label = Label(root, text="How many Bullet Points Would You Like? (Default: 3)").grid(row=3,column=1, padx=10,pady=10)
 bullet_points = Entry(root, width=10)
 bullet_points.grid(row=4,column=1, padx=10,pady=10)
+
 
 #on or off summary
 summ_label = Label(root, text="Summariazer").grid(row=5,column=1, padx=10,pady=10)

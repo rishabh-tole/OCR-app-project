@@ -6,7 +6,7 @@ class ImageToText:
     def __init__(self):
         pass
 
-    def convert(self, path = "testocr.png"):
+    def convert(self, path):
         
         raw_data = image_to_string(Image.open(path),lang='eng')
         f = open("document.txt", "a")
