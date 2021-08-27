@@ -129,7 +129,7 @@ open_file_button= ttk.Button(root, text="Open File", command=open_file).grid(row
 # 3 big labels for 3 types of conversions
 
 image_label = ttk.Label(root, text="Image into Notes",font=('Helvetica bold',20)).grid(row=2,column=0, padx=10,pady=10)
-audio_label = ttk.Label(root, text="Audio into Notes",font=('Helvetica bold',20)).grid(row=2,column=1, padx=10,pady=10)
+audio_label = ttk.Label(root, text="Audio into Notes(.wav only)",font=('Helvetica bold',20)).grid(row=2,column=1, padx=10,pady=10)
 website_label = ttk.Label(root, text="Website into Notes",font=('Helvetica bold',20)).grid(row=2,column=2, padx=10,pady=10)
 
 # place to enter num of points
