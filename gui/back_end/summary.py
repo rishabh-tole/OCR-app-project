@@ -28,8 +28,13 @@ class Summary():
         summarizer = Summarizer(stemmer)
         summarizer.stop_words = get_stop_words(LANGUAGE)
         master = ""
+        sentence_counter=0
         for sentence in summarizer(parser.document, bullets):
+            print(sentence)
             master = str(master)+str(sentence)
+            sentence_counter+=1
+
+        print(sentence_counter)
         return master
     
     def summarize_website(self, url, bullets=3):

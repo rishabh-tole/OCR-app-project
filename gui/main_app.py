@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter
 from tkinter import filedialog
 import os
 import sys
@@ -6,13 +7,14 @@ import time
 from tkinter import ttk
 from ttkthemes import themed_tk as tk
 
-sys.path.append("/Users/phinix/projects/note/back_end")
-sys.path.append("/Users/phinix/projects/note/gui")
+sys.path.append("")
+sys.path.append(".")
 os.system("clear")
 
-from image_to_text import ImageToText
-from summary import Summary
-from audio_to_text import AudioToText
+from back_end.image_to_text import ImageToText
+from back_end.summary import Summary
+
+from back_end.audio_to_text import AudioToText
 
 summary = Summary()
 audio = AudioToText()
@@ -113,6 +115,8 @@ def show_text(show_text):
     output_label.after(1, output_label.destroy) 
     output_label = ttk.Label(root,font=('Helvetica bold',20), text=show_text, wraplength=600)
     output_label.grid(row=10,column=0, columnspan=3)
+    root.clipboard_clear()
+    root.clipboard_append(show_text)
 
 def show_selected_path():
     global path_label, path
